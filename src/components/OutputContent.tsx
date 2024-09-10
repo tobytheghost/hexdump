@@ -64,7 +64,10 @@ export const OutputContent = ({ children }: { children: React.ReactNode }) => {
           <TableHead className="w-8"></TableHead>
           <TableHead>
             <button
-              onClick={createAddAllToClipboard(uniqueMatches, "all hexcodes")}
+              onClick={createAddAllToClipboard(
+                uniqueMatches.map(shortHexToFullHex),
+                "all hexcodes"
+              )}
             >
               Hexcode
             </button>

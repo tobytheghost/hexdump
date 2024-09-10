@@ -1,4 +1,3 @@
-import "./App.css";
 import { WrapContent } from "./components/WrapContent";
 import { OutputContent } from "./components/OutputContent";
 import { ToastContainer } from "react-toastify";
@@ -26,8 +25,27 @@ function App() {
             </a>
           </h1>
         </section>
-        <section className="grid grid-cols-2 flex-grow">
-          <div className="w-full px-2 relative text-sm">
+        <section className="px-2 flex">
+          <div className="flex gap-2 mb-2">
+            <button
+              className="px-2 border border-black text-sm rounded-sm cursor-pointer hover:scale-[1.01] active:scale-[0.99]"
+              onClick={() => {
+                setState({ c: encode("") });
+                textAreaRef.current?.focus();
+              }}
+            >
+              Clear Input
+            </button>
+            <button
+              className="px-2 border border-black text-sm rounded-sm cursor-pointer hover:scale-[1.01] active:scale-[0.99]"
+              onClick={() => setHighlight((prev) => !prev)}
+            >
+              Highlight ({highlight ? "On" : "Off"})
+            </button>
+          </div>
+        </section>
+        <section className="grid grid-cols-1 md:grid-cols-2 flex-grow gap-2 px-2 font-mono">
+          <div className="relative text-sm">
             <div className="overflow-auto bg-slate-50 h-full w-full p-2">
               <div className="whitespace-pre-wrap break-words text-transparent">
                 {highlight ? <WrapContent>{textContent}</WrapContent> : null}
@@ -37,28 +55,11 @@ function App() {
               ref={textAreaRef}
               value={textContent}
               onChange={(e) => setState({ c: encode(e.target.value) })}
-              className="border border-slate-600 h-full resize-none p-2 rounded-md bg-transparent absolute top-0 left-2 bottom-0 right-2 overflow-hidden"
+              className="border border-slate-600 h-full resize-none p-2 rounded-md bg-transparent absolute top-0 left-0 bottom-0 right-0 overflow-hidden"
               draggable={false}
             />
-            <div className="absolute top-1 right-3 flex gap-2">
-              <button
-                className="px-2 border border-black rounded-sm cursor-pointer hover:scale-[1.01] active:scale-[0.99]"
-                onClick={() => setHighlight((prev) => !prev)}
-              >
-                Toggle Highlight
-              </button>
-              <button
-                className="px-2 border border-black rounded-sm cursor-pointer hover:scale-[1.01] active:scale-[0.99]"
-                onClick={() => {
-                  setState({ c: encode("") });
-                  textAreaRef.current?.focus();
-                }}
-              >
-                Clear
-              </button>
-            </div>
           </div>
-          <div className="w-full px-2">
+          <div>
             <div className="border border-slate-600 h-full w-full resize-none p-2 rounded-md">
               <OutputContent>{textContent}</OutputContent>
             </div>

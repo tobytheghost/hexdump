@@ -19,6 +19,10 @@ export const WrapContent = ({ children }: { children: React.ReactNode }) => {
         </span>
       );
     }
+    if (index === splitString.length - 1) {
+      // Prevents the last space from being trimmed and causing the boxes to be misaligned
+      return <>{str}&nbsp;</>;
+    }
     return str;
   });
 };

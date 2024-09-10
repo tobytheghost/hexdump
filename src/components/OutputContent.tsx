@@ -11,29 +11,27 @@ import {
 import { toast } from "react-toastify";
 import { shortHexToFullHex } from "@/utils/shortHexToFullHex";
 
-export const OutputContent = ({ children }: { children: React.ReactNode }) => {
-  if (typeof children !== "string") return null;
-  const matches = parseTextContent(children).map((value) =>
-    value[0].toUpperCase()
+const createAddToClipboard = (value: string) => () => {
+  navigator.clipboard.writeText(value);
+  toast(
+    <div className="flex gap-2 items-center">
+      <div className="gap-2">
+        Copied <span className="font-bold">{value}</span> to clipboard!
+      </div>
+    </div>,
+    {
+      type: "success",
+    }
   );
-  const uniqueMatches = [...new Set(matches)];
-  if (!uniqueMatches.length) return null;
-  const createAddToClipboard = (value: string) => () => {
-    navigator.clipboard.writeText(value);
+};
+
+const createAddAllToClipboard =
+  (uniqueMatches: string[], type: string) => () => {
+    navigator.clipboard.writeText(uniqueMatches.join("\n"));
     toast(
       <div className="flex gap-2 items-center">
         <div className="gap-2">
-          <span>Copied </span>
-          <span className="font-bold">
-            <span
-              className="w-4 inline-block text-transparent mr-1"
-              style={{ background: value }}
-            >
-              []
-            </span>
-            {value}
-          </span>
-          <span> to clipboard</span>
+          Copied <span className="font-bold">{type}</span> to clipboard!
         </div>
       </div>,
       {
@@ -41,13 +39,46 @@ export const OutputContent = ({ children }: { children: React.ReactNode }) => {
       }
     );
   };
+
+export const OutputContent = ({ children }: { children: React.ReactNode }) => {
+  if (typeof children !== "string") return null;
+  const matches = parseTextContent(children).map((value) =>
+    value[0].toUpperCase()
+  );
+  const uniqueMatches = [...new Set(matches)];
+  if (!uniqueMatches.length) return null;
+  const uniqueRgbMatches = [
+    ...new Set(
+      uniqueMatches
+        .map((value) => {
+          const rbg = hexToRgb(value);
+          return rbg && `rgb(${rbg.r}, ${rbg.g}, ${rbg.b})`;
+        })
+        .filter(Boolean)
+    ),
+  ];
   return (
     <Table>
       <TableHeader>
         <TableRow>
           <TableHead className="w-8"></TableHead>
-          <TableHead>Hexcode</TableHead>
-          <TableHead>RGB</TableHead>
+          <TableHead>
+            <button
+              onClick={createAddAllToClipboard(uniqueMatches, "all hexcodes")}
+            >
+              Hexcode
+            </button>
+          </TableHead>
+          <TableHead>
+            <button
+              onClick={createAddAllToClipboard(
+                uniqueRgbMatches,
+                "all rgb values"
+              )}
+            >
+              RGB
+            </button>
+          </TableHead>
           <TableHead>Instances</TableHead>
         </TableRow>
       </TableHeader>

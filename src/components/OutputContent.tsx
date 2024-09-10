@@ -65,7 +65,7 @@ export const OutputContent = ({ children }: { children: React.ReactNode }) => {
           <TableHead>
             <button
               onClick={createAddAllToClipboard(
-                uniqueMatches.map(shortHexToFullHex),
+                [...new Set(uniqueMatches.map(shortHexToFullHex))],
                 "all hexcodes"
               )}
             >
@@ -104,7 +104,7 @@ export const OutputContent = ({ children }: { children: React.ReactNode }) => {
                   onClick={createAddToClipboard(shortHexToFullHex(value))}
                 >
                   {value !== shortHexToFullHex(value)
-                    ? `${shortHexToFullHex(value)} (${value})`
+                    ? `${value} (${shortHexToFullHex(value)})`
                     : value}
                 </button>
               </TableCell>

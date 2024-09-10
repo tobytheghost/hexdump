@@ -13,12 +13,10 @@ export const WrapContent = ({ children }: { children: React.ReactNode }) => {
     const match = matches[index]?.[0];
     if (match) {
       return (
-        <>
+        <span key={`${str}${match}${index}`}>
           {str}
-          <span key={match} className="bg-lime-300 inline-block">
-            {match}
-          </span>
-        </>
+          <span className="bg-lime-300 inline-block">{match}</span>
+        </span>
       );
     }
     return str;

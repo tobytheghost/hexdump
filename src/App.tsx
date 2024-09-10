@@ -1,12 +1,13 @@
-import { useState } from "react";
 import "./App.css";
 import { WrapContent } from "./components/WrapContent";
 import { OutputContent } from "./components/OutputContent";
 import { ToastContainer } from "react-toastify";
+import useUrlState from "@ahooksjs/use-url-state";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-  const [textContent, setTextContent] = useState("");
+  const [state, setState] = useUrlState({ c: "" });
+  const textContent = decodeURIComponent(atob(state.c));
 
   return (
     <>
@@ -23,7 +24,9 @@ function App() {
             </div>
             <textarea
               value={textContent}
-              onChange={(e) => setTextContent(e.target.value)}
+              onChange={(e) =>
+                setState({ c: btoa(encodeURIComponent(e.target.value)) })
+              }
               className="border border-slate-600 h-full resize-none p-2 rounded-md bg-transparent absolute top-0 left-2 bottom-0 right-2 overflow-hidden"
               draggable={false}
             />

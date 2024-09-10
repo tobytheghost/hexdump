@@ -52,13 +52,15 @@ export const OutputContent = ({ children }: { children: React.ReactNode }) => {
       </TableHeader>
       <TableBody>
         {uniqueMatches.map((value, index) => {
-          const rgbString = `rgb(${hexToRgb(value)?.r}, ${
-            hexToRgb(value)?.g
-          }, ${hexToRgb(value)?.b})`;
+          const rgb = hexToRgb(value);
+          const rgbString = rgb && `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
           return (
             <TableRow key={value + index} className="w-full">
               <TableCell>
-                <div className="w-4 h-4" style={{ background: value }}></div>
+                <div
+                  className="w-4 h-4 border border-black"
+                  style={{ background: value }}
+                ></div>
               </TableCell>
               <TableCell>
                 <button
@@ -73,7 +75,7 @@ export const OutputContent = ({ children }: { children: React.ReactNode }) => {
                 <button
                   type="button"
                   className="cursor-pointer"
-                  onClick={createAddToClipboard(rgbString)}
+                  onClick={() => rgbString && createAddToClipboard(rgbString)()}
                 >
                   {rgbString}
                 </button>

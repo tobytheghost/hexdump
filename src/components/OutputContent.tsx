@@ -48,7 +48,7 @@ export const OutputContent = ({ children }: { children: React.ReactNode }) => {
           <TableHead className="w-8"></TableHead>
           <TableHead>Hexcode</TableHead>
           <TableHead>RGB</TableHead>
-          <TableHead>Number</TableHead>
+          <TableHead>Instances</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>

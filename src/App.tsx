@@ -16,7 +16,7 @@ function App() {
           <h1 className="text-lg mb-2">HexDump</h1>
         </section>
         <section className="grid grid-cols-2 flex-grow">
-          <div className="w-full px-2 relative">
+          <div className="w-full px-2 relative text-sm">
             <div className="overflow-auto bg-slate-50 h-full w-full p-2">
               <div className="whitespace-pre-wrap break-words text-transparent">
                 <WrapContent>{textContent}</WrapContent>

@@ -2,19 +2,19 @@ export const placeholderText = `Welcome to Hex Dump!
 
 Paste your hex codes here ⬇
 
-Supports upper and lower case
+Supports upper and lower case:
 
 	✅ #fefefe
 
 	✅ #FEFEFE
 
-Support shorthand hex codes
+Supports shorthand hex codes:
 
 	✅ #fff
 
-Click on Hex in output to add to clipboard!
+Click on codes in output to add to clipboard!
 
-More examples which you can see in the output ➡
+More examples ➡
 
 	#1abc9c 	#16a085 	#2ecc71 	#27ae60
 	#3498db 	#2980b9 	#9b59b6 	#8e44ad

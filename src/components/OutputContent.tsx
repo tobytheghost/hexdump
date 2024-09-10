@@ -9,6 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { toast } from "react-toastify";
+import { shortHexToFullHex } from "@/utils/shortHexToFullHex";
 
 export const OutputContent = ({ children }: { children: React.ReactNode }) => {
   if (typeof children !== "string") return null;
@@ -66,9 +67,11 @@ export const OutputContent = ({ children }: { children: React.ReactNode }) => {
                 <button
                   type="button"
                   className="cursor-pointer"
-                  onClick={createAddToClipboard(value)}
+                  onClick={createAddToClipboard(shortHexToFullHex(value))}
                 >
-                  {value}
+                  {value !== shortHexToFullHex(value)
+                    ? `${shortHexToFullHex(value)} (${value})`
+                    : value}
                 </button>
               </TableCell>
               <TableCell>

@@ -46,7 +46,7 @@ function App() {
         </section>
         <section className="grid grid-cols-1 md:grid-cols-2 flex-grow gap-2 px-2 font-mono">
           <div className="relative text-sm">
-            <div className="overflow-auto bg-slate-50 h-full w-full p-2">
+            <div className="border border-transparent overflow-auto bg-slate-50 h-full w-full p-2">
               <div className="whitespace-pre-wrap break-words text-transparent">
                 {highlight ? <WrapContent>{textContent}</WrapContent> : null}
               </div>

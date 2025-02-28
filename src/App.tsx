@@ -58,6 +58,10 @@ function App() {
               onChange={(e) => setState({ c: encode(e.target.value) })}
               className="border border-slate-600 h-full resize-none p-2 rounded-md bg-transparent absolute top-0 left-0 bottom-0 right-0 overflow-hidden"
               draggable={false}
+              autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="off"
+              spellCheck="false"
             />
           </div>
           <div>

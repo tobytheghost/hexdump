@@ -52,6 +52,7 @@ function App() {
               </div>
             </div>
             <textarea
+              aria-label="Input"
               ref={textAreaRef}
               value={textContent}
               onChange={(e) => setState({ c: encode(e.target.value) })}

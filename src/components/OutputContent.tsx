@@ -43,7 +43,7 @@ const createAddAllToClipboard =
 export const OutputContent = ({ children }: { children: React.ReactNode }) => {
   if (typeof children !== "string") return null;
   const matches = parseTextContent(children).map((value) =>
-    value[0].toUpperCase()
+    value.toUpperCase()
   );
   const uniqueMatches = [...new Set(matches)];
   if (!uniqueMatches.length) return null;

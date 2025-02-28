@@ -64,6 +64,7 @@ export const OutputContent = ({ children }: { children: React.ReactNode }) => {
           <TableHead className="w-8"></TableHead>
           <TableHead>
             <button
+              className="cursor-pointer hover:underline"
               onClick={createAddAllToClipboard(
                 [...new Set(uniqueMatches.map(shortHexToFullHex))],
                 "all hexcodes"
@@ -74,6 +75,7 @@ export const OutputContent = ({ children }: { children: React.ReactNode }) => {
           </TableHead>
           <TableHead>
             <button
+              className="cursor-pointer hover:underline"
               onClick={createAddAllToClipboard(
                 uniqueRgbMatches,
                 "all rgb values"
@@ -100,7 +102,7 @@ export const OutputContent = ({ children }: { children: React.ReactNode }) => {
               <TableCell>
                 <button
                   type="button"
-                  className="cursor-pointer"
+                  className="cursor-pointer hover:underline"
                   onClick={createAddToClipboard(shortHexToFullHex(value))}
                 >
                   {value !== shortHexToFullHex(value)
@@ -111,7 +113,7 @@ export const OutputContent = ({ children }: { children: React.ReactNode }) => {
               <TableCell>
                 <button
                   type="button"
-                  className="cursor-pointer"
+                  className="cursor-pointer hover:underline"
                   onClick={() => rgbString && createAddToClipboard(rgbString)()}
                 >
                   {rgbString}

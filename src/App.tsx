@@ -1,13 +1,20 @@
 import { WrapContent } from "./components/WrapContent";
 import { OutputContent } from "./components/OutputContent";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import useUrlState from "@ahooksjs/use-url-state";
 import { useRef, useState } from "react";
 import { placeholderText } from "./utils/placeholderText";
 import "react-toastify/dist/ReactToastify.css";
 
 const encode = (text: string) => btoa(encodeURIComponent(text));
-const decode = (text: string) => decodeURIComponent(atob(text));
+const decode = (text: string) => {
+  try {
+    return decodeURIComponent(atob(text));
+  } catch (error) {
+    console.error(error);
+    return "";
+  }
+};
 
 function App() {
   const [state, setState] = useUrlState({ c: encode(placeholderText) });
@@ -41,6 +48,22 @@ function App() {
               onClick={() => setHighlight((prev) => !prev)}
             >
               Highlight ({highlight ? "On" : "Off"})
+            </button>
+            <button
+              className="px-2 border border-black text-sm rounded-sm cursor-pointer hover:scale-[1.01] active:scale-[0.99]"
+              onClick={() => {
+                navigator.clipboard.writeText(window.location.href);
+                toast(
+                  <div className="flex gap-2 items-center">
+                    <div className="gap-2">Copied URL to clipboard!</div>
+                  </div>,
+                  {
+                    type: "success",
+                  }
+                );
+              }}
+            >
+              Copy Worksheet URL
             </button>
           </div>
         </section>

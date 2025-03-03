@@ -19,7 +19,6 @@ export const WrapContent = ({ children }: { children: React.ReactNode }) => {
         {REGEX.HEX.test(str) ? (
           <span className="inline-block">
             {str?.split(REGEX.HEX).map((subStr, index) => {
-              console.log({ subStr });
               return (
                 <React.Fragment key={`${str}${subStr}${index}`}>
                   {REGEX.HEX.test(subStr) ? (
